@@ -9,4 +9,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial framework implementation
 
 
-[unreleased]: https://github.com/razorcorp/go-routing-engine/compare/master...develop
+[unreleased]: https://github.com/razorcorp/go-routing-engine/compare/4c83a5e...HEAD

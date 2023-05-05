@@ -1,6 +1,5 @@
 def NODE = 'Slave'
 def GPG_KEY_ID = '53298CC2E45BABE9AAE5FC342EB97A2D4CD98917'
-def GPG_PASSPHRASE_ID = '76854055-a980-4292-a1a1-e9476da9a946'
 
 pipeline {
     agent {
@@ -17,7 +16,7 @@ pipeline {
 
         stage('GPG Config') {
             environment {
-                gpg_passphrase = credentials(GPG_PASSPHRASE_ID)
+                gpg_passphrase = credentials('76854055-a980-4292-a1a1-e9476da9a946')
             }
             steps {
                 sh "/usr/lib/gnupg2/gpg-preset-passphrase --preset --passphrase ${gpg_passphrase} $GPG_KEY_ID"

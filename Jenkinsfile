@@ -7,6 +7,13 @@ pipeline {
         }
     }
 
+    options {
+        timeout(time: 15, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        disableConcurrentBuilds(abortPrevious: true)
+        timestamps()
+    }
+
     parameters {
         string(name: 'version', defaultValue: '', description: 'Release version (X.X.X).\n0.0.1')
     }

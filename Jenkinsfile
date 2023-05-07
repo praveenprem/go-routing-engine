@@ -26,6 +26,7 @@ pipeline {
 
         stage('Start Release') {
             steps {
+                print 'Release start'
                 sh "git checkout -B release/${params.version}"
             }
         }
@@ -50,11 +51,34 @@ pipeline {
                 sh "git tag -s ${params.version} -m \"Release ${params.version}\""
                 sh "git checkout develop"
                 sh "git merge -S --no-commit master"
+                print 'Release finish'
+            }
+        }
+
+        stage('Push to origin') {
+            input {
+                message 'Push to origin?'
+                ok 'Yes'
+            }
+            steps {
+                sh "git push master develop"
             }
         }
     }
 
     post {
+        success {
+            slackSend color: "good", message: "${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER} Success - (<${env.BUILD_URL}|Open>)"
+        }
+
+        aborted {
+            slackSend color: "warning", message: "${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER} aborted by user - (<${env.BUILD_URL}|Open>)"
+        }
+
+        failure {
+            slackSend color: "danger", message: "${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER} Failure - (<${env.BUILD_URL}|Open>)"
+        }
+
         cleanup {
             deleteDir()
         }

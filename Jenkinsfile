@@ -55,7 +55,7 @@ pipeline {
                 sh "git merge -S --no-ff --no-commit release/${params.version}"
                 sh "git commit -S -m \"Merge release/${params.version}\""
                 sh "git branch -D release/${params.version}"
-                sh "git tag -s ${params.version} -m \"Release ${params.version}\""
+                sh "git tag -s v${params.version} -m \"Release ${params.version}\""
                 sh "git checkout develop"
                 sh "git merge -S --no-commit master"
                 print 'Release finish'

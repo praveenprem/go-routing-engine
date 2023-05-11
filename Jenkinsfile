@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sshagent(credentials: [SSH_KEY_ID]) {
                     sh 'git push origin master'
-                    sh 'git push develop'
+                    sh 'git push origin develop'
                     sh "git push origin v${params.version}"
                 }
             }

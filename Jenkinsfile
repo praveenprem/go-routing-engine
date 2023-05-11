@@ -42,8 +42,8 @@ pipeline {
         stage('Update CHANGELOG') {
             steps {
                 sh """
-                sed -i -e 's/\\(##.*\\)\\(unreleased\\)\\(.*\\)\$/\\1\\2\\3\\n\\n\\1${params.version}\\3/g' \\
-                    -e 's/\\(\\[.*\\]\\)\\(.*\\/\\)\\(.*\\)\\.\\.\\.\\(.*\\)\$/\\1\\21.0.0...HEAD\\n\\[1.0.0\\]\\2\\3...${params.version}/g' CHANGELOG.md
+                sed -i -e 's/\\(##.*\\)\\(unreleased\\)\\(.*\\)\$/\\1\\2\\3\\n\\n\\1v${params.version}\\3/g' \\
+                    -e 's/\\(\\[.*\\]\\)\\(.*\\/\\)\\(.*\\)\\.\\.\\.\\(.*\\)\$/\\1\\2v${params.version}...HEAD\\n\\[v${params.version}\\]\\2\\3...v${params.version}/g' CHANGELOG.md
                 """
             }
         }

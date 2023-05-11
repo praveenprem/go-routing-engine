@@ -1,4 +1,5 @@
 def NODE = 'Slave'
+def SSH_KEY_ID = '34eff5cc-5c4c-46ab-a541-600c84729870'
 
 pipeline {
     agent {
@@ -68,7 +69,11 @@ pipeline {
                 ok 'Yes'
             }
             steps {
-                sh "git push master develop"
+                sshagent(credentials: [SSH_KEY_ID]) {
+                    sh 'git push origin master'
+                    sh 'git push develop'
+                    sh "git push origin v${params.version}"
+                }
             }
         }
     }

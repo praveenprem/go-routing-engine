@@ -1,6 +1,6 @@
 # Go Routing Engine
 
-[![stable](https://img.shields.io/github/v/tag/razorcorp/go-routing-engine?sort=semver&logo=github&style=for-the-badge&label=Tag)](https://github.com/razorcorp/go-routing-engine/releases/latest)
+[![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/razorcorp/go-routing-engine?sort=semver&style=for-the-badge&logo=github&label=Tag)](https://github.com/razorcorp/go-routing-engine/tags)
 ![GitHub](https://img.shields.io/github/license/razorcorp/go-routing-engine?style=for-the-badge)
 
 [//]: # (![GitHub Release Date]&#40;https://img.shields.io/github/tag-date/razorcorp/go-routing-engine?display_date=published_at&style=for-the-badge&label=Release%20Date&#41;)

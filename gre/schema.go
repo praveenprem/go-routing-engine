@@ -88,6 +88,11 @@ type (
 
 		looping bool
 	}
+
+	response struct {
+		Code   int    `json:"code"`
+		Status string `json:"status"`
+	}
 )
 
 // Json encode ErrorResponse object for transmit.
@@ -99,13 +104,28 @@ func (e *ErrorResponse) Json() string {
 			log.Fatalln("error response looping detected")
 		}
 		log.Printf("%#v", e)
-		response := ErrorResponse{
+		resp := ErrorResponse{
 			Code:    http.StatusInternalServerError,
 			Cause:   "something went wrong, try again in few minutes",
 			Debug:   "err: JSON encoding failed",
 			looping: true,
 		}
-		return response.Json()
+		return resp.Json()
+	}
+	return string(body)
+}
+
+func (r *response) json() string {
+	body, err := json.Marshal(r)
+	if err != nil {
+		log.Printf("%#v", r)
+		resp := ErrorResponse{
+			Code:    http.StatusInternalServerError,
+			Cause:   "something went wrong, try again in few minutes",
+			Debug:   "err: JSON encoding failed",
+			looping: true,
+		}
+		return resp.Json()
 	}
 	return string(body)
 }

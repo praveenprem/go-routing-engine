@@ -62,14 +62,13 @@ func main() {
 			AccessControlAllowMethods: []string{"POST", "GET", "OPTIONS", "PUT", "DELETE"},
 			AccessControlAllowHeaders: []string{"Accept", "Content-Type", "Content-Length", "Accept-Encoding", "Authorization"},
 		}).
-		AddMiddleware(appRecovery).
-		//AddRoutes(gre.Route{Name: "Hello",
-		//	Methods:     []string{http.MethodGet},
-		//	Pattern:     "/hello",
-		//	Deprecated:  false,
-		//	HandlerFunc: hello,
-		//}).
-		Build()
+		AddMiddleware(appRecovery)
+	//AddRoutes(gre.Route{Name: "Hello",
+	//	Methods:     []string{http.MethodGet},
+	//	Pattern:     "/hello",
+	//	Deprecated:  false,
+	//	HandlerFunc: hello,
+	//}).
 
 	<-server.Start()
 

@@ -34,6 +34,13 @@ func addRoutes(routes Routes, strict bool) *mux.Router {
 	log.Println("add global handler 405 - method not allowed")
 	router.MethodNotAllowedHandler = http.HandlerFunc(add405)
 
+	router.
+		Name("Prometheus metrics").
+		Methods(http.MethodGet).
+		Path("/metrics").
+		Handler(Logger(promhttp.Handler(), "Prometheus metrics"))
+	log.Println("add mapping: Prometheus metrics ( [GET] /metrics )")
+
 	for _, route := range routes {
 		var handler http.Handler
 		if route.Deprecated {
@@ -53,15 +60,19 @@ func addRoutes(routes Routes, strict bool) *mux.Router {
 		log.Printf("add mapping: %s ( %s %s )\n", route.Name, route.Methods, route.Pattern)
 	}
 
-	router.
-		Methods(http.MethodGet).
-		Path("/metrics").
-		Handler(promhttp.Handler())
-
 	router.Use(mux.CORSMethodMiddleware(router))
 	router.Use(promMiddleware)
 
 	return router
+}
+
+func health(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	resp := response{
+		Code:   http.StatusOK,
+		Status: "Alive",
+	}
+	fmt.Fprint(w, resp.json())
 }
 
 func add404(w http.ResponseWriter, r *http.Request) {

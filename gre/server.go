@@ -28,7 +28,14 @@ var (
 	// this allows users to append Route to from anywhere
 	// keeping the Route configurations and handler functions
 	// on the same file
-	RouteTable Routes
+	RouteTable = Routes{
+		Route{
+			Name:        "Health",
+			Methods:     []string{http.MethodGet},
+			Pattern:     "/health",
+			HandlerFunc: health,
+		},
+	}
 )
 
 // NewServer returns a vanilla Server definition for later
@@ -88,6 +95,8 @@ func (s *Server) Build() *Server {
 // returns chan os.Signal
 func (s *Server) Start() chan os.Signal {
 	log.Println("starting server daemon")
+
+	s.Build()
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)

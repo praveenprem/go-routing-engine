@@ -1,5 +1,10 @@
 # Go Routing Engine
 
+[![stable](https://img.shields.io/github/v/tag/razorcorp/go-routing-engine?sort=semver&logo=github&style=for-the-badge&label=Tag)](https://github.com/razorcorp/go-routing-engine/releases/latest)
+![GitHub](https://img.shields.io/github/license/razorcorp/go-routing-engine?style=for-the-badge)
+
+[//]: # (![GitHub Release Date]&#40;https://img.shields.io/github/tag-date/razorcorp/go-routing-engine?display_date=published_at&style=for-the-badge&label=Release%20Date&#41;)
+
 GRE is a light framework for building RestAPIs for small and large scale applications. This is a simple framework build on 
 router and dispatcher.
 
@@ -13,6 +18,8 @@ However, this framework does have few restrictions:
 > More information on route options, refer to https://pkg.go.dev/github.com/gorilla/mux#Route.Path
 
 ## Installation
+[![Go Reference](https://pkg.go.dev/badge/github.com/razorcorp/go-routing-engine/gre.svg)](https://pkg.go.dev/github.com/razorcorp/go-routing-engine/gre)
+![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/razorcorp/go-routing-engine/master?filename=go.mod&&style=flat)
 
 With a [correctly configured](https://golang.org/doc/install#testing) Go toolchain:
 
